@@ -13,7 +13,7 @@ class UserService {
         }
     }
 
-    async addUser(req, res){
+    async addUser(req){
         try {
             const newUser = await AppDataSource.getRepository(User).create(req);
             const result = await AppDataSource.getRepository(User).save(newUser);
@@ -22,6 +22,11 @@ class UserService {
             console.log(error);
         }
     }
+
+    async getUserById(userId) {
+        const userRepository = await AppDataSource.getRepository(User);
+        return userRepository.findOne(userId);
+      }
 }
 
 
